@@ -1,9 +1,11 @@
 // define an array to hold the objects
-let objects = [];
+let objects = [name, color, size];
 
 // define a constructor function for objects
 function makeObject(name, color, size) {
-return {name,color,size}
+  this.name = name;
+  this.color = color;
+  this.size = size;
 }
 
 // define a function to render the objects
@@ -28,14 +30,20 @@ function handleFormSubmit(event) {
   let nameInput = document.getElementById("name-input");
   let colorInput = document.getElementById("color-input");
   let sizeInput = document.getElementById("size-input");
-  let name = nameInput.value;
-  let color = colorInput.value;
-  let size = sizeInput.value;
-  let object = makeObject(name, color, size);
+  let name = nameInput.value.trim();
+  let color = colorInput.value.trim();
+  let size = sizeInput.value.trim();
+  
+  if (!name || !color || !size) {
+    alert("Please fill in all fields.");
+    return;
+  }
+  
+  let object = new makeObject(name, color, size);
   objects.push(object);
-  nameInput.value = "";
-  colorInput.value = "";
-  sizeInput.value = "";
+  nameInput.value = "Rafael";
+  colorInput.value = "blue";
+  sizeInput.value = "32";
   renderObjects();
 }
 
